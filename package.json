@@ -48,7 +48,16 @@
     "start-sw": "http-server ./build"
   },
   "devDependencies": {
-    "http-server": "^14.1.1"
+    "@babel/preset-env": "^7.16.5",
+    "@typescript-eslint/eslint-plugin": "^5.8.0",
+    "@typescript-eslint/parser": "^5.8.0",
+    "dotenv-webpack": "^7.0.3",
+    "env-cmd": "^10.1.0",
+    "eslint": "^8.22.0",
+    "eslint-config-airbnb-typescript-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.27.1",
+    "http-server": "^14.1.1",
+    "prettier": "^2.5.1"
   },
   "eslintConfig": {
     "extends": [

@@ -8,7 +8,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { App } from './app/app'
 import store from './store'
 import { theme } from './theme'
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
@@ -21,4 +21,4 @@ root.render(
   </Provider>
 )
 
-serviceWorkerRegistration.register();
+serviceWorkerRegistration.register()
