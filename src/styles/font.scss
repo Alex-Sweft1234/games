@@ -1,0 +1,18 @@
+@mixin font-face($family: Arial, $type: '', $weight: normal, $style: normal, $display: swap) {
+  @font-face {
+    font-family: $family;
+    src: url('./font/#{$family}/#{$family}-#{$type}.ttf') format('truetype');
+    font-weight: $weight;
+    font-style: $style;
+    font-display: $display;
+  }
+}
+
+@include font-face('Roboto', 'Thin', 100);
+@include font-face('Roboto', 'Light', 300);
+@include font-face('Roboto', 'Regular', 400);
+@include font-face('Roboto', 'Medium', 500);
+@include font-face('Roboto', 'Bold', 700);
+@include font-face('Roboto', 'Black', 900);
+
+$font_primary: 400 18px 'Roboto';

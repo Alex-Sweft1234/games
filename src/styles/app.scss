@@ -1,0 +1,11 @@
+@import 'font';
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(to bottom, #43cea2 , #185a9d);
+    font: $font_primary;
+    touch-action: none;
+}
