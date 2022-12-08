@@ -49,9 +49,8 @@ module.exports = {
     'default-param-last': 'off',
     'import/prefer-default-export': 'off',
     'import/no-extraneous-dependencies': 'off',
-    // allow jsx syntax in js files (for next.js project)
-    // eslint-disable-next-line max-len
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }], // should add ".ts" if typescript project
+    'no-underscore-dangle': 'off',
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'prettier/prettier': [
       'error',
       {

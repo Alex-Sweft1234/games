@@ -1,42 +1,38 @@
 /// <reference lib="webworker" />
-/* eslint-disable */
-import { clientsClaim } from 'workbox-core';
-import { ExpirationPlugin } from 'workbox-expiration';
-import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
-import { registerRoute } from 'workbox-routing';
-import { StaleWhileRevalidate, NetworkFirst, NetworkOnly } from 'workbox-strategies';
+import { clientsClaim } from 'workbox-core'
+import { ExpirationPlugin } from 'workbox-expiration'
+import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching'
+import { registerRoute } from 'workbox-routing'
+import { StaleWhileRevalidate, NetworkFirst, NetworkOnly } from 'workbox-strategies'
 
-declare const self: ServiceWorkerGlobalScope;
+declare const self: ServiceWorkerGlobalScope
 
-clientsClaim();
+clientsClaim()
 
-precacheAndRoute(self.__WB_MANIFEST);
+precacheAndRoute(self.__WB_MANIFEST)
 
 // Network First  strategy (Network Falling Back to Cache)
-registerRoute(({url}) => url.pathname.startsWith('/social-timeline/'), new NetworkFirst());
+registerRoute(({ url }) => url.pathname.startsWith('/social-timeline/'), new NetworkFirst())
 
 // Network Only strategy
 // registerRoute(({url}) => url.pathname.startsWith('/admin/'), new NetworkOnly());
 
-const fileExtensionRegexp = new RegExp('/[^/?]+\\.[^/]+$');
-registerRoute(
-  ({ request, url }: { request: Request; url: URL }) => {
-    if (request.mode !== 'navigate') {
-      return false;
-    }
+const fileExtensionRegexp = /\/[^\/?]+\.[^\/]+$/
+registerRoute(({ request, url }: { request: Request; url: URL }) => {
+  if (request.mode !== 'navigate') {
+    return false
+  }
 
-    if (url.pathname.startsWith('/_')) {
-      return false;
-    }
+  if (url.pathname.startsWith('/_')) {
+    return false
+  }
 
-    if (url.pathname.match(fileExtensionRegexp)) {
-      return false;
-    }
+  if (url.pathname.match(fileExtensionRegexp)) {
+    return false
+  }
 
-    return true;
-  },
-  createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html')
-);
+  return true
+}, createHandlerBoundToURL(`${process.env.PUBLIC_URL}/index.html`))
 
 registerRoute(
   ({ url }) => url.origin === self.location.origin && url.pathname.endsWith('.png'),
@@ -44,10 +40,10 @@ registerRoute(
     cacheName: 'images',
     plugins: [new ExpirationPlugin({ maxEntries: 50 })],
   })
-);
+)
 
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
+    self.skipWaiting()
   }
-});
+})
