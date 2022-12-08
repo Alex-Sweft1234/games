@@ -15,7 +15,7 @@ precacheAndRoute(self.__WB_MANIFEST)
 registerRoute(({ url }) => url.pathname.startsWith('/social-timeline/'), new NetworkFirst())
 
 // Network Only strategy
-// registerRoute(({url}) => url.pathname.startsWith('/admin/'), new NetworkOnly());
+// registerRoute(({ url }) => url.pathname.startsWith('/admin/'), new NetworkOnly())
 
 const fileExtensionRegexp = /\/[^\/?]+\.[^\/]+$/
 registerRoute(({ request, url }: { request: Request; url: URL }) => {
