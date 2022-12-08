@@ -45,7 +45,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start-sw": "http-server ./build"
+    "start-sw": "http-server ./build",
+    "debug-http:start": "npm run build && npm run start-sw"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.16.5",
