@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify'
+
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     window.location.hostname === '[::1]' ||
@@ -39,6 +41,12 @@ function registerValidSW(swUrl: string, config?: Config) {
   navigator.serviceWorker
     .register(swUrl)
     .then((registration) => {
+      registration.update()
+      setInterval(() => {
+        registration.update()
+        console.debug('Checked for update...')
+      }, 1000 * 60 * 5)
+
       // eslint-disable-next-line no-param-reassign
       registration.onupdatefound = () => {
         const installingWorker = registration.installing
@@ -52,6 +60,13 @@ function registerValidSW(swUrl: string, config?: Config) {
                 'New content is available and will be used when all ' +
                   'tabs for this page are closed. See https://cra.link/PWA.'
               )
+
+              toast.info(`Update available! Click on this post to update.`, {
+                toastId: 'appUpdateAvailable',
+                position: toast.POSITION.TOP_CENTER,
+                onClick: () => window.close(),
+                autoClose: false,
+              })
 
               if (config && config.onUpdate) {
                 config.onUpdate(registration)

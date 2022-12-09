@@ -1,6 +1,8 @@
-import { Box, Grid, Link } from '@mui/material'
 import React from 'react'
+import { Box, Grid, Link } from '@mui/material'
 import { MyLink } from '../../components'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 type MenuProps = {
   title: string
