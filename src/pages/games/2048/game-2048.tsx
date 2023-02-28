@@ -174,11 +174,13 @@ function moveRight(arr: number[][], score: number): { board: number[][]; score: 
 }
 
 export const Game2048Page: React.FC = () => {
-  const sm = useMediaQuery(({ breakpoints: { down } }: Theme) => down(600))
   const navigate = useNavigate()
+  const { press, watch: pressWatch } = usePressDetect()
   const { setBoard2048Update, setBoard2048Reset } = useReduxActions()
   const { touch, watch: touchWatch } = useTouchDetect('touch')
-  const { press, watch: pressWatch } = usePressDetect()
+
+  const sm = useMediaQuery(({ breakpoints: { down } }: Theme) => down(600))
+
   const { board, score } = useReduxSelector((state) => state.board2048)
   const [gameStatusEnd, setGameStatusEnd] = useState<{ success: boolean; failure: boolean }>({
     success: false,
@@ -196,12 +198,12 @@ export const Game2048Page: React.FC = () => {
     setGameStatusEnd({ success: false, failure: false })
   }
 
-  const statusGame = (arr: number[][], move: { board: number[][]; score: number }) => {
+  const statusGame = (move: { board: number[][]; score: number }) => {
     if (!gameStatusEnd.failure && !gameStatusEnd.success) {
       setBoard2048Update(move)
-      if (gameOver(arr) === GAMESTATUS.FAILURE) {
+      if (gameOver(move.board) === GAMESTATUS.FAILURE) {
         setGameStatusEnd({ ...gameStatusEnd, failure: true })
-      } else if (gameOver(arr) === GAMESTATUS.SUCCESS) {
+      } else if (gameOver(move.board) === GAMESTATUS.SUCCESS) {
         setGameStatusEnd({ ...gameStatusEnd, success: true })
       }
     }
@@ -212,16 +214,16 @@ export const Game2048Page: React.FC = () => {
 
     switch (keyDetect) {
       case KEYMOVE.UP:
-        statusGame(boardCopy, moveUp(boardCopy, score))
+        statusGame(moveUp(boardCopy, score))
         break
       case KEYMOVE.DOWN:
-        statusGame(boardCopy, moveDown(boardCopy, score))
+        statusGame(moveDown(boardCopy, score))
         break
       case KEYMOVE.LEFT:
-        statusGame(boardCopy, moveLeft(boardCopy, score))
+        statusGame(moveLeft(boardCopy, score))
         break
       case KEYMOVE.RIGHT:
-        statusGame(boardCopy, moveRight(boardCopy, score))
+        statusGame(moveRight(boardCopy, score))
         break
       default:
         break
